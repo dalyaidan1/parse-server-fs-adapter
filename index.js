@@ -9,6 +9,7 @@ const path = require('path');
 const pathSep = require('path').sep;
 const crypto = require("crypto");
 const algorithm = 'aes-256-gcm';
+const { Readable, Transform } = require('stream')
 
 function FileSystemAdapter(options) {
   options = options || {};
