@@ -31,11 +31,11 @@ FileSystemAdapter.prototype.createFile = function (filename, data) {
   const stream = fs.createWriteStream(filepath);
   return new Promise((resolve, reject) => {
     try {
-      const iv = this._encryptionKey !== null ? crypto.randomBytes(16) : null;
+      const iv = this._encryptionKey ? crypto.randomBytes(16) : null;
 
       const cipher =
-        this._encryptionKey !== null && iv
-          ? crypto.createCipheriv(this._algorithm, this._encryptionKey, iv)
+        this._encryptionKey && iv
+          ? crypto.createCipheriv(algorithm, this._encryptionKey, iv)
           : null;
 
       // when working with a Blob, it could be over the max size of a buffer, so we need to stream it
